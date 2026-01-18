@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Giusto o Sbagliato? - Cyber Edition</title>
+    
+    <meta name="theme-color" id="meta-theme-color" content="#1a1a2e">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#1a1a2e">
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
+    <style>
+        :root {
+            /* 0. Cyber Dark (Default) */
+            --bg-start: #0f0c29; --bg-end: #24243e; --card-bg: #16213e;
+            --accent-neon: #00f2ff; --accent-pink: #ff00ff; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
+        }
+
+        /* 1. Cyber Light */
+        .theme-light {
+            --bg-start: #e0f7fa; --bg-end: #80deea; --card-bg: #ffffff;
+            --accent-neon: #00bcd4; --accent-pink: #e91e63; --text-main: #1a1a2e;
+            --neon-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
+        }
+
+        /* 2. Matrix (Retro Green) */
+        .theme-matrix {
+            --bg-start: #000000; --bg-end: #001a00; --card-bg: #000d00;
+            --accent-neon: #00ff41; --accent-pink: #008f11; --text-main: #00ff41;
+            --neon-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+
+        /* 3. Sunset (Synthwave) */
+        .theme-sunset {
+            --bg-start: #2d0b5a; --bg-end: #ff5e62; --card-bg: #4b134f;
+            --accent-neon: #ff9900; --accent-pink: #ff007c; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
+        }
+
+        /* 4. Forest (Nature) */
+        .theme-forest {
+            --bg-start: #1b3022; --bg-end: #395742; --card-bg: #263d2e;
+            --accent-neon: #a3ccab; --accent-pink: #e07a5f; --text-main: #f4f1de;
+            --neon-shadow: 0 0 15px rgba(163, 204, 171, 0.4);
+        }
+
+        /* 5. Gold (Luxury) */
+        .theme-gold {
+            --bg-start: #1a1a1a; --bg-end: #4d4d4d; --card-bg: #262626;
+            --accent-neon: #d4af37; --accent-pink: #f9e29c; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* 6. Crimson (Deep Red) */
+        .theme-crimson {
+            --bg-start: #280000; --bg-end: #660000; --card-bg: #3d0000;
+            --accent-neon: #ff4d4d; --accent-pink: #990000; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
+        }
+
+        /* 7. Midnight (Minimal Blue) */
+        .theme-midnight {
+            --bg-start: #000428; --bg-end: #004e92; --card-bg: #000c2a;
+            --accent-neon: #00d2ff; --accent-pink: #3a7bd5; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
+        }
+
+        /* 8. Desert (Warmer) */
+        .theme-desert {
+            --bg-start: #edc9af; --bg-end: #d2b48c; --card-bg: #f5f5dc;
+            --accent-neon: #8b4513; --accent-pink: #cd853f; --text-main: #3d2b1f;
+            --neon-shadow: 0 0 10px rgba(139, 69, 19, 0.2);
+        }
+
+        /* 9. Ultraviolet */
+        .theme-ultra {
+            --bg-start: #6441a5; --bg-end: #2a0845; --card-bg: #3f1e69;
+            --accent-neon: #bf94ff; --accent-pink: #f4d0ff; --text-main: #ffffff;
+            --neon-shadow: 0 0 15px rgba(191, 148, 255, 0.5);
+        }
+
+        * { box-sizing: border-box; touch-action: manipulation; }
+
+        body { 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            height: 100vh; margin: 0;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            color: var(--text-main);
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
+            transition: all 0.5s ease;
+        }
+
+        .container { 
+            background: var(--card-bg); padding: 2vh 5vw; border-radius: 20px; 
+            width: 95%; max-width: 500px; height: 90vh;
+            display: flex; flex-direction: column; justify-content: space-between;
+            border: 2px solid var(--accent-neon);
+            box-shadow: var(--neon-shadow), inset 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center; position: relative; transition: all 0.5s ease;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-12px); }
+            50% { transform: translateX(12px); }
+            75% { transform: translateX(-12px); }
+            100% { transform: translateX(0); }
+        }
+
+        .shake-animation {
+            animation: shake 0.3s cubic-bezier(.36,.07,.19,.97) both;
+            border-color: var(--accent-pink) !important;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.8) !important;
+        }
+
+        .screen { display: none; flex-direction: column; height: 100%; justify-content: center; }
+        .active { display: flex; animation: fadeIn 0.3s; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .header-title { font-size: 2rem; font-weight: 900; margin-bottom: 10px; color: var(--accent-neon); text-shadow: var(--neon-shadow); }
+        .subtitle { font-size: 0.9rem; opacity: 0.9; margin-bottom: 30px; font-weight: 600; text-transform: uppercase; color: var(--accent-pink); }
+
+        .btn-main { 
+            background: transparent; color: var(--accent-neon); padding: 18px; border: 2px solid var(--accent-neon); border-radius: 50px; 
+            cursor: pointer; font-size: 1.4rem; font-weight: bold; margin: 10px 0; transition: 0.3s;
+            box-shadow: var(--neon-shadow); text-transform: uppercase;
+        }
+        .btn-main:active { background: var(--accent-neon); color: #000; }
+
+        .btn-opt {
+            background: rgba(255, 255, 255, 0.05); border: 2px solid var(--accent-pink); color: var(--text-main); 
+            padding: 15px; border-radius: 15px; cursor: pointer; width: 100%; margin-bottom: 12px; font-weight: bold;
+        }
+
+        .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .tool-btn { 
+            font-size: 0.8rem; cursor: pointer; padding: 12px; background: rgba(0,0,0,0.1); 
+            border: 1px solid var(--accent-neon); border-radius: 12px; font-weight: bold; color: var(--text-main);
+        }
+
+        .timer-wrapper { width: 100%; height: 8px; background: rgba(0,0,0,0.2); border-radius: 10px; margin: 15px 0; overflow: hidden; }
+        #timer-bar-domanda { width: 100%; height: 100%; background: var(--accent-neon); }
+        #global-timer { font-weight: bold; color: var(--accent-pink); font-size: 1.5rem; }
+
+        .domanda-card {
+            background: rgba(0,0,0,0.1); padding: 20px; border-radius: 15px; min-height: 120px; 
+            display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent-neon); margin-bottom: 15px;
+        }
+
+        .controls { display: flex; justify-content: space-around; margin-top: 10px; }
+        .btn-ctrl { background: var(--text-main); color: var(--bg-start); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        
+        <div id="home-screen" class="screen active">
+            <div>
+                <h1 class="header-title" id="theme-display">CYBER QUIZ</h1>
+                <p class="subtitle">SBAGLIA PER VINCERE</p>
+            </div>
+            
+            <button class="btn-main" onclick="iniziaGioco()">GIOCA</button>
+            
+            <div class="tools-grid">
+                <button class="tool-btn" onclick="condividi()">🔗 CONDIVIDI APP</button>
+                <button class="tool-btn" onclick="cambiaTema()">🎨 TEMI</button>
+                <button class="tool-btn" onclick="scaricaAPK()">📲 SCARICA APK</button>
+            </div>
+        </div>
+
+        <div id="game-screen" class="screen">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div id="global-timer">150s</div>
+                <div id="progress-text" style="font-size:0.9rem; font-weight: bold; color: var(--accent-neon);">LIVELLO 1/20</div>
+            </div>
+            <div class="timer-wrapper"><div id="timer-bar-domanda"></div></div>
+            <div class="domanda-card"><h2 id="domanda-testo" style="font-size: 1.1rem; margin: 0;">Inizializzazione...</h2></div>
+            <div id="opzioni-box"></div>
+            <div class="controls">
+                <button class="btn-ctrl" onclick="togglePausa()">PAUSA</button>
+                <button class="btn-ctrl" onclick="tornareHome()">ESCI</button>
+            </div>
+        </div>
+
+        <div id="end-screen" class="screen">
+            <h1 style="color: var(--accent-neon);">SISTEMA COMPLETATO</h1>
+            <p>Anomalie risolte con successo.</p>
+            <button class="btn-main" onclick="tornareHome()">REBOOT</button>
+        </div>
+
+    </div>
+
+    <script>
+        let database = [];
+        let domandeSessione = [];
+        let indice = 0;
+        let tempoTotale = 150;
+        let timerD, timerG;
+        let isPaused = false;
+        let lastTap = 0;
+
+        // Gestione Temi (10 totali)
+        const temi = [
+            '', 'theme-light', 'theme-matrix', 'theme-sunset', 'theme-forest', 
+            'theme-gold', 'theme-crimson', 'theme-midnight', 'theme-desert', 'theme-ultra'
+        ];
+        let currentThemeIdx = 0;
+
+        function cambiaTema() {
+            document.body.classList.remove(...temi.filter(t => t !== ''));
+            currentThemeIdx = (currentThemeIdx + 1) % temi.length;
+            if (temi[currentThemeIdx] !== '') {
+                document.body.classList.add(temi[currentThemeIdx]);
+            }
+        }
+
+        // Full Screen
+        document.addEventListener('keydown', (e) => { if(e.code === "Space") toggleFullScreen(); });
+        document.addEventListener('touchend', (e) => {
+            const currentTime = new Date().getTime();
+            if (currentTime - lastTap < 300) toggleFullScreen();
+            lastTap = currentTime;
+        });
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+            else document.exitFullscreen();
+        }
+
+        async function loadDB() {
+            try {
+                const r = await fetch('domande.json');
+                database = await r.json();
+            } catch(e) { console.error("DB Error"); }
+        }
+
+        function mostraSchermata(id) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+
+        function iniziaGioco() {
+            if(database.length === 0) return alert("Database in caricamento...");
+            const cartelle = [...new Set(database.map(d => d.cartella))];
+            const cScelta = cartelle[Math.floor(Math.random() * cartelle.length)];
+            domandeSessione = database.filter(d => d.cartella === cScelta).slice(0, 20);
+            indice = 0; tempoTotale = 150; isPaused = false;
+            mostraSchermata('game-screen');
+            avviaTimerGlobale();
+            prossimaDomanda();
+        }
+
+        function avviaTimerGlobale() {
+            clearInterval(timerG);
+            timerG = setInterval(() => {
+                if(!isPaused) {
+                    tempoTotale--;
+                    document.getElementById('global-timer').innerText = tempoTotale + "s";
+                    if(tempoTotale <= 0) tornareHome();
+                }
+            }, 1000);
+        }
+
+        function prossimaDomanda() {
+            if (indice >= domandeSessione.length) return fineSessione();
+            const d = domandeSessione[indice];
+            document.getElementById('domanda-testo').innerText = d.domanda;
+            document.getElementById('progress-text').innerText = `LIVELLO ${indice + 1}/20`;
+            const box = document.getElementById('opzioni-box');
+            box.innerHTML = "";
+
+            let opzioniMix = d.opzioni.map((testo, i) => ({ testo, id: i + 1 }));
+            opzioniMix.sort(() => Math.random() - 0.5); 
+
+            opzioniMix.forEach(opz => {
+                const btn = document.createElement('button');
+                btn.className = "btn-opt";
+                btn.innerText = opz.testo;
+                btn.onclick = () => verifica(opz.id, d.corretta);
+                box.appendChild(btn);
+            });
+            resetTimerDomanda();
+        }
+
+        function resetTimerDomanda() {
+            clearInterval(timerD);
+            const bar = document.getElementById('timer-bar-domanda');
+            bar.style.transition = 'none'; bar.style.width = '100%';
+            setTimeout(() => { bar.style.transition = 'width 10s linear'; bar.style.width = '0%'; }, 50);
+            timerD = setTimeout(() => { if(!isPaused) triggerError(); }, 10000);
+        }
+
+        function triggerError() {
+            const container = document.getElementById('main-container');
+            container.classList.add('shake-animation');
+            setTimeout(() => {
+                container.classList.remove('shake-animation');
+                indice = 0;
+                prossimaDomanda();
+            }, 400);
+        }
+
+        function verifica(scelta, corretta) {
+            if(isPaused) return;
+            clearInterval(timerD);
+            if (scelta === corretta) triggerError();
+            else { indice++; setTimeout(prossimaDomanda, 200); }
+        }
+
+        function togglePausa() {
+            isPaused = !isPaused;
+            if(isPaused) { clearInterval(timerD); alert("SISTEMA IN PAUSA"); } 
+            else prossimaDomanda();
+        }
+
+        function tornareHome() {
+            clearInterval(timerD); clearInterval(timerG);
+            mostraSchermata('home-screen');
+        }
+
+        function fineSessione() {
+            clearInterval(timerD); clearInterval(timerG);
+            mostraSchermata('end-screen');
+        }
+
+        function condividi() {
+            const shareData = { title: 'Cyber Quiz', text: 'Sbaglia per vincere!', url: window.location.href };
+            if (navigator.share) navigator.share(shareData);
+        }
+
+        function scaricaAPK() { window.location.href = 'GiustoSbagliato.apk'; }
+
+        loadDB();
+    </script>
+</body>
+</html>
