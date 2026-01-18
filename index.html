@@ -409,10 +409,32 @@
         }
 
         function condividi() {
-            const shareData = { title: 'Cyber Quiz', text: 'Sbaglia per vincere!', url: window.location.href };
-            if (navigator.share) navigator.share(shareData);
-            else alert("Funzione di condivisione non supportata su questo browser.");
-        }
+    const url = window.location.href;
+    const text = 'Sbaglia per vincere! Gioca a Cyber Quiz';
+    
+    // Prova la condivisione nativa (smartphone)
+    if (navigator.share) {
+        navigator.share({ 
+            title: 'Cyber Quiz', 
+            text: text, 
+            url: url 
+        })
+        .catch(() => copiaLink(url)); // Fallback se l'utente annulla o c'è un errore
+    } else {
+        // Fallback per browser PC o non supportati
+        copiaLink(url);
+    }
+}
+
+function copiaLink(url) {
+    navigator.clipboard.writeText(url).then(() => {
+        alert("Link copiato negli appunti! 📋\nIncollalo dove vuoi per condividere.");
+    }).catch(err => {
+        // Ultima risorsa: mostra il link in un prompt
+        prompt("Copia questo link:", url);
+    });
+}
+
 
         function scaricaAPK() { window.location.href = 'GiustoSbagliato.apk'; }
 
@@ -420,3 +442,4 @@
     </script>
 </body>
 </html>
+
