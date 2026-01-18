@@ -161,6 +161,16 @@
 
         .controls { display: flex; justify-content: space-around; margin-top: 10px; }
         .btn-ctrl { background: var(--text-main); color: var(--bg-start); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+
+        /* Stili per il Countdown */
+        #countdown-text {
+            font-size: 6rem;
+            font-weight: 900;
+            color: var(--accent-pink);
+            text-shadow: 0 0 30px var(--accent-pink);
+            animation: pulse 0.5s infinite alternate;
+        }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
     </style>
 </head>
 <body>
@@ -182,13 +192,17 @@
             </div>
         </div>
 
+        <div id="countdown-screen" class="screen">
+            <div id="countdown-text">3</div>
+        </div>
+
         <div id="game-screen" class="screen">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <div id="global-timer">150s</div>
                 <div id="progress-text" style="font-size:0.9rem; font-weight: bold; color: var(--accent-neon);">LIVELLO 1/20</div>
             </div>
             <div class="timer-wrapper"><div id="timer-bar-domanda"></div></div>
-            <div class="domanda-card"><h2 id="domanda-testo" style="font-size: 1.1rem; margin: 0;">Inizializzazione...</h2></div>
+            <div class="domanda-card"><h2 id="domanda-testo" style="font-size: 1.1rem; margin: 0;">Caricamento...</h2></div>
             <div id="opzioni-box"></div>
             <div class="controls">
                 <button class="btn-ctrl" onclick="togglePausa()">PAUSA</button>
@@ -197,9 +211,9 @@
         </div>
 
         <div id="end-screen" class="screen">
-            <h1 style="color: var(--accent-neon);">SISTEMA COMPLETATO</h1>
-            <p>Anomalie risolte con successo.</p>
-            <button class="btn-main" onclick="tornareHome()">REBOOT</button>
+            <h1 id="end-title" style="color: var(--accent-neon);">SISTEMA COMPLETATO</h1>
+            <p id="end-message">Anomalie risolte.</p>
+            <button class="btn-main" onclick="tornareHome()">RESET</button>
         </div>
 
     </div>
@@ -209,6 +223,7 @@
         let domandeSessione = [];
         let indice = 0;
         let tempoTotale = 150;
+        let tempoIniziale = 150; // Costante per calcolo finale
         let timerD, timerG;
         let isPaused = false;
         let lastTap = 0;
@@ -255,11 +270,42 @@
 
         function iniziaGioco() {
             if(database.length === 0) return alert("Database in caricamento...");
+            
+            // Preparazione logica
             const cartelle = [...new Set(database.map(d => d.cartella))];
             const cScelta = cartelle[Math.floor(Math.random() * cartelle.length)];
             domandeSessione = database.filter(d => d.cartella === cScelta).slice(0, 20);
-            indice = 0; tempoTotale = 150; isPaused = false;
+            indice = 0; 
+            tempoTotale = 150; 
+            tempoIniziale = 150;
+            isPaused = false;
+
+            // Avvio Countdown invece di andare subito al gioco
+            avviaCountdown();
+        }
+
+        function avviaCountdown() {
+            mostraSchermata('countdown-screen');
+            const el = document.getElementById('countdown-text');
+            let count = 3;
+            el.innerText = count;
+
+            const intv = setInterval(() => {
+                count--;
+                if(count > 0) {
+                    el.innerText = count;
+                } else if (count === 0) {
+                    el.innerText = "VIA!";
+                } else {
+                    clearInterval(intv);
+                    startPartitaEffettiva();
+                }
+            }, 1000);
+        }
+
+        function startPartitaEffettiva() {
             mostraSchermata('game-screen');
+            document.getElementById('global-timer').innerText = tempoTotale + "s";
             avviaTimerGlobale();
             prossimaDomanda();
         }
@@ -270,13 +316,17 @@
                 if(!isPaused) {
                     tempoTotale--;
                     document.getElementById('global-timer').innerText = tempoTotale + "s";
-                    if(tempoTotale <= 0) tornareHome();
+                    if(tempoTotale <= 0) {
+                        // Tempo scaduto -> Sconfitta
+                        mostraFinale(false); 
+                    }
                 }
             }, 1000);
         }
 
         function prossimaDomanda() {
-            if (indice >= domandeSessione.length) return fineSessione();
+            if (indice >= domandeSessione.length) return fineSessione(); // Vittoria
+            
             const d = domandeSessione[indice];
             document.getElementById('domanda-testo').innerText = d.domanda;
             document.getElementById('progress-text').innerText = `LIVELLO ${indice + 1}/20`;
@@ -309,6 +359,7 @@
             container.classList.add('shake-animation');
             setTimeout(() => {
                 container.classList.remove('shake-animation');
+                // Errore: si ricomincia da capo (Hardcore mode)
                 indice = 0;
                 prossimaDomanda();
             }, 400);
@@ -317,6 +368,7 @@
         function verifica(scelta, corretta) {
             if(isPaused) return;
             clearInterval(timerD);
+            // Ricorda: la risposta "giusta" nel gioco è quella sbagliata
             if (scelta === corretta) triggerError();
             else { indice++; setTimeout(prossimaDomanda, 200); }
         }
@@ -333,13 +385,33 @@
         }
 
         function fineSessione() {
+            // Se arrivi qui, hai completato i livelli
+            mostraFinale(true);
+        }
+
+        function mostraFinale(vittoria) {
             clearInterval(timerD); clearInterval(timerG);
             mostraSchermata('end-screen');
+
+            const titolo = document.getElementById('end-title');
+            const msg = document.getElementById('end-message');
+
+            if (vittoria) {
+                const tempoImpiegato = tempoIniziale - tempoTotale;
+                titolo.innerText = "OTTIMO!";
+                titolo.style.color = "var(--accent-neon)";
+                msg.innerHTML = `HAI RISOLTO IN <b>${tempoImpiegato}</b> SECONDI`;
+            } else {
+                titolo.innerText = "TEMPO SCADUTO";
+                titolo.style.color = "var(--accent-pink)"; // Rosso/Rosa per errore
+                msg.innerText = "RITENTA, PUOI FARCELA!";
+            }
         }
 
         function condividi() {
             const shareData = { title: 'Cyber Quiz', text: 'Sbaglia per vincere!', url: window.location.href };
             if (navigator.share) navigator.share(shareData);
+            else alert("Funzione di condivisione non supportata su questo browser.");
         }
 
         function scaricaAPK() { window.location.href = 'GiustoSbagliato.apk'; }
@@ -348,5 +420,3 @@
     </script>
 </body>
 </html>
-
-
