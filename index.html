@@ -307,11 +307,35 @@
             curTheme = (curTheme + 1) % temi.length;
             if (temi[curTheme] !== '') document.body.classList.add(temi[curTheme]);
         }
-        function condividi() { if (navigator.share) navigator.share({ title: 'Cyber Quiz', url: window.location.href }); }
+        function condividi() {
+    const shareData = {
+        title: 'Cyber Quiz',
+        text: 'Sbaglia per vincere! Prova questo gioco:',
+        url: 'https://asarritzu-boop.github.io/GiustoSbagliato/'
+    };
+
+    if (navigator.share) {
+        // Prova la condivisione nativa del browser/WebView
+        navigator.share(shareData).catch(() => {
+            // Se fallisce (comune in APK), usa il fallback
+            apriCondivisioneAlternativa(shareData.url);
+        });
+    } else {
+        // Fallback per dispositivi che non supportano navigator.share
+        apriCondivisioneAlternativa(shareData.url);
+    }
+}
+
+function apriCondivisioneAlternativa(url) {
+    // Apre una finestra di dialogo o reindirizza a un servizio di messaggistica
+    const msg = encodeURIComponent("Prova questo gioco Cyber Quiz: " + url);
+    window.open("https://api.whatsapp.com/send?text=" + msg, "_blank");
+}
         function scaricaAPK() { window.location.href = 'GiustoSbagliato.apk'; }
 
         loadDB();
     </script>
 </body>
 </html>
+
 
