@@ -5,90 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Giusto o Sbagliato? - Cyber Edition</title>
     
-    <meta property="og:title" content="Giusto o Sbagliato? - Cyber Edition">
-    <meta property="og:description" content="L'unico gioco dove la risposta sbagliata è quella corretta. Accetta la sfida!">
-    <meta property="og:image" content="https://asarritzu.github.io/GiustoSbagliato/icona.png">
-    <meta property="og:url" content="https://asarritzu.github.io/GiustoSbagliato/">
-    <meta property="og:type" content="website">
-    <meta property="og:image:width" content="300">
-    <meta property="og:image:height" content="300">
-
     <meta name="theme-color" id="meta-theme-color" content="#1a1a2e">
     <meta name="apple-mobile-web-app-status-bar-style" content="#1a1a2e">
     
-    <link rel="icon" type="image/png" href="icona.png">
-    <link rel="apple-touch-icon" href="icona.png">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
 
     <style>
         :root {
-            /* 0. Cyber Dark (Default) */
             --bg-start: #0f0c29; --bg-end: #24243e; --card-bg: #16213e;
             --accent-neon: #00f2ff; --accent-pink: #ff00ff; --text-main: #ffffff;
             --neon-shadow: 0 0 15px rgba(0, 242, 255, 0.7);
         }
 
-        /* 1. Cyber Light */
-        .theme-light {
-            --bg-start: #e0f7fa; --bg-end: #80deea; --card-bg: #ffffff;
-            --accent-neon: #00bcd4; --accent-pink: #e91e63; --text-main: #1a1a2e;
-            --neon-shadow: 0 0 10px rgba(0, 188, 212, 0.3);
-        }
-
-        /* 2. Matrix (Retro Green) */
-        .theme-matrix {
-            --bg-start: #000000; --bg-end: #001a00; --card-bg: #000d00;
-            --accent-neon: #00ff41; --accent-pink: #008f11; --text-main: #00ff41;
-            --neon-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
-        }
-
-        /* 3. Sunset (Synthwave) */
-        .theme-sunset {
-            --bg-start: #2d0b5a; --bg-end: #ff5e62; --card-bg: #4b134f;
-            --accent-neon: #ff9900; --accent-pink: #ff007c; --text-main: #ffffff;
-            --neon-shadow: 0 0 15px rgba(255, 153, 0, 0.5);
-        }
-
-        /* 4. Forest (Nature) */
-        .theme-forest {
-            --bg-start: #1b3022; --bg-end: #395742; --card-bg: #263d2e;
-            --accent-neon: #a3ccab; --accent-pink: #e07a5f; --text-main: #f4f1de;
-            --neon-shadow: 0 0 15px rgba(163, 204, 171, 0.4);
-        }
-
-        /* 5. Gold (Luxury) */
-        .theme-gold {
-            --bg-start: #1a1a1a; --bg-end: #4d4d4d; --card-bg: #262626;
-            --accent-neon: #d4af37; --accent-pink: #f9e29c; --text-main: #ffffff;
-            --neon-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
-        }
-
-        /* 6. Crimson (Deep Red) */
-        .theme-crimson {
-            --bg-start: #280000; --bg-end: #660000; --card-bg: #3d0000;
-            --accent-neon: #ff4d4d; --accent-pink: #990000; --text-main: #ffffff;
-            --neon-shadow: 0 0 15px rgba(255, 77, 77, 0.5);
-        }
-
-        /* 7. Midnight (Minimal Blue) */
-        .theme-midnight {
-            --bg-start: #000428; --bg-end: #004e92; --card-bg: #000c2a;
-            --accent-neon: #00d2ff; --accent-pink: #3a7bd5; --text-main: #ffffff;
-            --neon-shadow: 0 0 15px rgba(0, 210, 255, 0.5);
-        }
-
-        /* 8. Desert (Warmer) */
-        .theme-desert {
-            --bg-start: #edc9af; --bg-end: #d2b48c; --card-bg: #f5f5dc;
-            --accent-neon: #8b4513; --accent-pink: #cd853f; --text-main: #3d2b1f;
-            --neon-shadow: 0 0 10px rgba(139, 69, 19, 0.2);
-        }
-
-        /* 9. Ultraviolet */
-        .theme-ultra {
-            --bg-start: #6441a5; --bg-end: #2a0845; --card-bg: #3f1e69;
-            --accent-neon: #bf94ff; --accent-pink: #f4d0ff; --text-main: #ffffff;
-            --neon-shadow: 0 0 15px rgba(191, 148, 255, 0.5);
-        }
+        .theme-light { --bg-start: #e0f7fa; --bg-end: #80deea; --card-bg: #ffffff; --accent-neon: #00bcd4; --accent-pink: #e91e63; --text-main: #1a1a2e; --neon-shadow: 0 0 10px rgba(0, 188, 212, 0.3); }
+        .theme-matrix { --bg-start: #000000; --bg-end: #001a00; --card-bg: #000d00; --accent-neon: #00ff41; --accent-pink: #008f11; --text-main: #00ff41; --neon-shadow: 0 0 15px rgba(0, 255, 65, 0.5); }
+        .theme-sunset { --bg-start: #2d0b5a; --bg-end: #ff5e62; --card-bg: #4b134f; --accent-neon: #ff9900; --accent-pink: #ff007c; --text-main: #ffffff; --neon-shadow: 0 0 15px rgba(255, 153, 0, 0.5); }
+        .theme-forest { --bg-start: #1b3022; --bg-end: #395742; --card-bg: #263d2e; --accent-neon: #a3ccab; --accent-pink: #e07a5f; --text-main: #f4f1de; --neon-shadow: 0 0 15px rgba(163, 204, 171, 0.4); }
+        .theme-gold { --bg-start: #1a1a1a; --bg-end: #4d4d4d; --card-bg: #262626; --accent-neon: #d4af37; --accent-pink: #f9e29c; --text-main: #ffffff; --neon-shadow: 0 0 15px rgba(212, 175, 55, 0.5); }
+        .theme-crimson { --bg-start: #280000; --bg-end: #660000; --card-bg: #3d0000; --accent-neon: #ff4d4d; --accent-pink: #990000; --text-main: #ffffff; --neon-shadow: 0 0 15px rgba(255, 77, 77, 0.5); }
+        .theme-midnight { --bg-start: #000428; --bg-end: #004e92; --card-bg: #000c2a; --accent-neon: #00d2ff; --accent-pink: #3a7bd5; --text-main: #ffffff; --neon-shadow: 0 0 15px rgba(0, 210, 255, 0.5); }
+        .theme-desert { --bg-start: #edc9af; --bg-end: #d2b48c; --card-bg: #f5f5dc; --accent-neon: #8b4513; --accent-pink: #cd853f; --text-main: #3d2b1f; --neon-shadow: 0 0 10px rgba(139, 69, 19, 0.2); }
+        .theme-ultra { --bg-start: #6441a5; --bg-end: #2a0845; --card-bg: #3f1e69; --accent-neon: #bf94ff; --accent-pink: #f4d0ff; --text-main: #ffffff; --neon-shadow: 0 0 15px rgba(191, 148, 255, 0.5); }
 
         * { box-sizing: border-box; touch-action: manipulation; }
 
@@ -129,7 +67,7 @@
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .header-title { font-size: 2rem; font-weight: 900; margin-bottom: 10px; color: var(--accent-neon); text-shadow: var(--neon-shadow); }
+        .header-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; color: var(--accent-neon); text-shadow: var(--neon-shadow); }
         .subtitle { font-size: 0.9rem; opacity: 0.9; margin-bottom: 30px; font-weight: 600; text-transform: uppercase; color: var(--accent-pink); }
 
         .btn-main { 
@@ -144,11 +82,7 @@
             padding: 15px; border-radius: 15px; cursor: pointer; width: 100%; margin-bottom: 12px; font-weight: bold;
         }
 
-        .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-        .tool-btn { 
-            font-size: 0.8rem; cursor: pointer; padding: 12px; background: rgba(0,0,0,0.1); 
-            border: 1px solid var(--accent-neon); border-radius: 12px; font-weight: bold; color: var(--text-main);
-        }
+        #countdown-number { font-size: 6rem; font-weight: 900; color: var(--accent-neon); text-shadow: var(--neon-shadow); }
 
         .timer-wrapper { width: 100%; height: 8px; background: rgba(0,0,0,0.2); border-radius: 10px; margin: 15px 0; overflow: hidden; }
         #timer-bar-domanda { width: 100%; height: 100%; background: var(--accent-neon); }
@@ -161,16 +95,8 @@
 
         .controls { display: flex; justify-content: space-around; margin-top: 10px; }
         .btn-ctrl { background: var(--text-main); color: var(--bg-start); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
-
-        /* Stili per il Countdown */
-        #countdown-text {
-            font-size: 6rem;
-            font-weight: 900;
-            color: var(--accent-pink);
-            text-shadow: 0 0 30px var(--accent-pink);
-            animation: pulse 0.5s infinite alternate;
-        }
-        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
+        .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .tool-btn { font-size: 0.8rem; cursor: pointer; padding: 12px; background: rgba(0,0,0,0.1); border: 1px solid var(--accent-neon); border-radius: 12px; font-weight: bold; color: var(--text-main); }
     </style>
 </head>
 <body>
@@ -179,12 +105,10 @@
         
         <div id="home-screen" class="screen active">
             <div>
-                <h1 class="header-title" id="theme-display">CYBER QUIZ</h1>
+                <h1 class="header-title">CYBER QUIZ</h1>
                 <p class="subtitle">SBAGLIA PER VINCERE</p>
             </div>
-            
-            <button class="btn-main" onclick="iniziaGioco()">GIOCA</button>
-            
+            <button class="btn-main" onclick="avviaCountdown()">GIOCA</button>
             <div class="tools-grid">
                 <button class="tool-btn" onclick="condividi()">🔗 CONDIVIDI APP</button>
                 <button class="tool-btn" onclick="cambiaTema()">🎨 TEMI</button>
@@ -193,16 +117,16 @@
         </div>
 
         <div id="countdown-screen" class="screen">
-            <div id="countdown-text">3</div>
+            <div id="countdown-number">3</div>
         </div>
 
         <div id="game-screen" class="screen">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div id="global-timer">150s</div>
+                <div id="global-timer">120s</div>
                 <div id="progress-text" style="font-size:0.9rem; font-weight: bold; color: var(--accent-neon);">LIVELLO 1/20</div>
             </div>
             <div class="timer-wrapper"><div id="timer-bar-domanda"></div></div>
-            <div class="domanda-card"><h2 id="domanda-testo" style="font-size: 1.1rem; margin: 0;">Caricamento...</h2></div>
+            <div class="domanda-card"><h2 id="domanda-testo">Caricamento...</h2></div>
             <div id="opzioni-box"></div>
             <div class="controls">
                 <button class="btn-ctrl" onclick="togglePausa()">PAUSA</button>
@@ -211,9 +135,9 @@
         </div>
 
         <div id="end-screen" class="screen">
-            <h1 id="end-title" style="color: var(--accent-neon);">SISTEMA COMPLETATO</h1>
-            <p id="end-message">Anomalie risolte.</p>
-            <button class="btn-main" onclick="tornareHome()">RESET</button>
+            <h1 id="end-title">SISTEMA COMPLETATO</h1>
+            <p id="end-message" style="font-size: 1.2rem; margin: 20px 0;"></p>
+            <button class="btn-main" onclick="tornareHome()">RIPROVA</button>
         </div>
 
     </div>
@@ -222,45 +146,40 @@
         let database = [];
         let domandeSessione = [];
         let indice = 0;
-        let tempoTotale = 150;
-        let tempoIniziale = 150; // Costante per calcolo finale
+        let tempoTotale = 120;
         let timerD, timerG;
         let isPaused = false;
         let lastTap = 0;
 
-        // Gestione Temi (10 totali)
-        const temi = [
-            '', 'theme-light', 'theme-matrix', 'theme-sunset', 'theme-forest', 
-            'theme-gold', 'theme-crimson', 'theme-midnight', 'theme-desert', 'theme-ultra'
-        ];
-        let currentThemeIdx = 0;
-
-        function cambiaTema() {
-            document.body.classList.remove(...temi.filter(t => t !== ''));
-            currentThemeIdx = (currentThemeIdx + 1) % temi.length;
-            if (temi[currentThemeIdx] !== '') {
-                document.body.classList.add(temi[currentThemeIdx]);
+        // --- FULL SCREEN (SPAZIO E DOPPIO TAP) ---
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
             }
         }
 
-        // Full Screen
-        document.addEventListener('keydown', (e) => { if(e.code === "Space") toggleFullScreen(); });
+        document.addEventListener('keydown', (e) => { 
+            if(e.code === "Space") { e.preventDefault(); toggleFullScreen(); }
+        });
+
         document.addEventListener('touchend', (e) => {
             const currentTime = new Date().getTime();
-            if (currentTime - lastTap < 300) toggleFullScreen();
+            const tapLength = currentTime - lastTap;
+            if (tapLength < 300 && tapLength > 0) {
+                e.preventDefault();
+                toggleFullScreen();
+            }
             lastTap = currentTime;
         });
 
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
-            else document.exitFullscreen();
-        }
-
+        // --- LOGICA GIOCO ---
         async function loadDB() {
             try {
                 const r = await fetch('domande.json');
                 database = await r.json();
-            } catch(e) { console.error("DB Error"); }
+            } catch(e) { console.error("Errore Database"); }
         }
 
         function mostraSchermata(id) {
@@ -268,44 +187,25 @@
             document.getElementById(id).classList.add('active');
         }
 
-        function iniziaGioco() {
-            if(database.length === 0) return alert("Database in caricamento...");
-            
-            // Preparazione logica
-            const cartelle = [...new Set(database.map(d => d.cartella))];
-            const cScelta = cartelle[Math.floor(Math.random() * cartelle.length)];
-            domandeSessione = database.filter(d => d.cartella === cScelta).slice(0, 20);
-            indice = 0; 
-            tempoTotale = 150; 
-            tempoIniziale = 150;
-            isPaused = false;
-
-            // Avvio Countdown invece di andare subito al gioco
-            avviaCountdown();
-        }
-
         function avviaCountdown() {
+            if(database.length === 0) return alert("Attendi il caricamento...");
             mostraSchermata('countdown-screen');
-            const el = document.getElementById('countdown-text');
             let count = 3;
+            const el = document.getElementById('countdown-number');
             el.innerText = count;
-
             const intv = setInterval(() => {
                 count--;
-                if(count > 0) {
-                    el.innerText = count;
-                } else if (count === 0) {
-                    el.innerText = "VIA!";
-                } else {
-                    clearInterval(intv);
-                    startPartitaEffettiva();
-                }
+                if(count === 0) el.innerText = "VIA!";
+                else if(count < 0) { clearInterval(intv); iniziaGioco(); }
+                else el.innerText = count;
             }, 1000);
         }
 
-        function startPartitaEffettiva() {
+        function iniziaGioco() {
+            let rimescolato = [...database].sort(() => Math.random() - 0.5);
+            domandeSessione = rimescolato.slice(0, 20);
+            indice = 0; tempoTotale = 120; isPaused = false;
             mostraSchermata('game-screen');
-            document.getElementById('global-timer').innerText = tempoTotale + "s";
             avviaTimerGlobale();
             prossimaDomanda();
         }
@@ -316,26 +216,19 @@
                 if(!isPaused) {
                     tempoTotale--;
                     document.getElementById('global-timer').innerText = tempoTotale + "s";
-                    if(tempoTotale <= 0) {
-                        // Tempo scaduto -> Sconfitta
-                        mostraFinale(false); 
-                    }
+                    if(tempoTotale <= 0) gestisciSconfitta();
                 }
             }, 1000);
         }
 
         function prossimaDomanda() {
-            if (indice >= domandeSessione.length) return fineSessione(); // Vittoria
-            
+            if (indice >= domandeSessione.length) return fineSessione();
             const d = domandeSessione[indice];
             document.getElementById('domanda-testo').innerText = d.domanda;
             document.getElementById('progress-text').innerText = `LIVELLO ${indice + 1}/20`;
             const box = document.getElementById('opzioni-box');
             box.innerHTML = "";
-
-            let opzioniMix = d.opzioni.map((testo, i) => ({ testo, id: i + 1 }));
-            opzioniMix.sort(() => Math.random() - 0.5); 
-
+            let opzioniMix = d.opzioni.map((testo, i) => ({ testo, id: i + 1 })).sort(() => Math.random() - 0.5); 
             opzioniMix.forEach(opz => {
                 const btn = document.createElement('button');
                 btn.className = "btn-opt";
@@ -359,8 +252,7 @@
             container.classList.add('shake-animation');
             setTimeout(() => {
                 container.classList.remove('shake-animation');
-                // Errore: si ricomincia da capo (Hardcore mode)
-                indice = 0;
+                indice = 0; 
                 prossimaDomanda();
             }, 400);
         }
@@ -368,9 +260,22 @@
         function verifica(scelta, corretta) {
             if(isPaused) return;
             clearInterval(timerD);
-            // Ricorda: la risposta "giusta" nel gioco è quella sbagliata
             if (scelta === corretta) triggerError();
             else { indice++; setTimeout(prossimaDomanda, 200); }
+        }
+
+        function fineSessione() {
+            clearInterval(timerD); clearInterval(timerG);
+            document.getElementById('end-title').innerText = "OTTIMO! HAI VINTO LA SFIDA";
+            document.getElementById('end-message').innerHTML = `Tempo impiegato: <strong>${120 - tempoTotale}s</strong>`;
+            mostraSchermata('end-screen');
+        }
+
+        function gestisciSconfitta() {
+            clearInterval(timerD); clearInterval(timerG);
+            document.getElementById('end-title').innerText = "TEMPO SCADUTO";
+            document.getElementById('end-message').innerHTML = `Risposte corrette: <strong>${indice}</strong>`;
+            mostraSchermata('end-screen');
         }
 
         function togglePausa() {
@@ -384,63 +289,18 @@
             mostraSchermata('home-screen');
         }
 
-        function fineSessione() {
-            // Se arrivi qui, hai completato i livelli
-            mostraFinale(true);
+        // --- ALTRE FUNZIONI ---
+        const temi = ['', 'theme-light', 'theme-matrix', 'theme-sunset', 'theme-forest', 'theme-gold', 'theme-crimson', 'theme-midnight', 'theme-desert', 'theme-ultra'];
+        let curTheme = 0;
+        function cambiaTema() {
+            document.body.classList.remove(...temi.filter(t => t !== ''));
+            curTheme = (curTheme + 1) % temi.length;
+            if (temi[curTheme] !== '') document.body.classList.add(temi[curTheme]);
         }
-
-        function mostraFinale(vittoria) {
-            clearInterval(timerD); clearInterval(timerG);
-            mostraSchermata('end-screen');
-
-            const titolo = document.getElementById('end-title');
-            const msg = document.getElementById('end-message');
-
-            if (vittoria) {
-                const tempoImpiegato = tempoIniziale - tempoTotale;
-                titolo.innerText = "OTTIMO!";
-                titolo.style.color = "var(--accent-neon)";
-                msg.innerHTML = `HAI RISOLTO IN <b>${tempoImpiegato}</b> SECONDI`;
-            } else {
-                titolo.innerText = "TEMPO SCADUTO";
-                titolo.style.color = "var(--accent-pink)"; // Rosso/Rosa per errore
-                msg.innerText = "RITENTA, PUOI FARCELA!";
-            }
-        }
-
-        function condividi() {
-    const url = window.location.href;
-    const text = 'Sbaglia per vincere! Gioca a Cyber Quiz';
-    
-    // Prova la condivisione nativa (smartphone)
-    if (navigator.share) {
-        navigator.share({ 
-            title: 'Cyber Quiz', 
-            text: text, 
-            url: url 
-        })
-        .catch(() => copiaLink(url)); // Fallback se l'utente annulla o c'è un errore
-    } else {
-        // Fallback per browser PC o non supportati
-        copiaLink(url);
-    }
-}
-
-function copiaLink(url) {
-    navigator.clipboard.writeText(url).then(() => {
-        alert("Link copiato negli appunti! 📋\nIncollalo dove vuoi per condividere.");
-    }).catch(err => {
-        // Ultima risorsa: mostra il link in un prompt
-        prompt("Copia questo link:", url);
-    });
-}
-
-
+        function condividi() { if (navigator.share) navigator.share({ title: 'Cyber Quiz', url: window.location.href }); }
         function scaricaAPK() { window.location.href = 'GiustoSbagliato.apk'; }
 
         loadDB();
     </script>
 </body>
 </html>
-
-
