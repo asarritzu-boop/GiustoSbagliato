@@ -107,6 +107,37 @@
         .btn-ctrl { background: var(--text-main); color: var(--bg-start); border: none; padding: 8px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .tool-btn { font-size: 0.8rem; cursor: pointer; padding: 12px; background: rgba(0,0,0,0.1); border: 1px solid var(--accent-neon); border-radius: 12px; font-weight: bold; color: var(--text-main); }
+    /* Ottimizzazione per orientamento orizzontale su smartphone */
+@media (orientation: landscape) and (max-height: 500px) {
+    .container { 
+        height: 96vh; 
+        padding: 1vh 3vw; 
+    }
+    .header-title { font-size: 1.5rem; margin-bottom: 5px; }
+    .subtitle { margin-bottom: 5px; font-size: 0.7rem; }
+    .domanda-card { 
+        min-height: 60px; 
+        padding: 10px; 
+        margin-bottom: 8px; 
+    }
+    #domanda-testo { font-size: 1.1rem; }
+    .btn-opt { 
+        padding: 8px; 
+        margin-bottom: 5px; 
+        font-size: 0.9rem; 
+    }
+    .timer-wrapper { 
+        margin: 5px 0; 
+        height: 6px; 
+    }
+    #global-timer { font-size: 1.1rem; }
+    .tools-grid { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr; 
+        gap: 5px; 
+    }
+    .tool-btn { padding: 8px; font-size: 0.7rem; }
+}
     </style>
     <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#0a0a0a">
@@ -308,10 +339,20 @@
             else prossimaDomanda();
         }
 
-        function tornareHome() {
-            clearInterval(timerD); clearInterval(timerG);
-            mostraSchermata('home-screen');
+         function tornareHome() {
+    const schermataAttiva = document.querySelector('.screen.active').id;
+
+    // Chiede conferma solo se l'utente sta giocando o è nel countdown
+    if (schermataAttiva === 'game-screen' || schermataAttiva === 'countdown-screen') {
+        if (!confirm("Vuoi davvero uscire? La partita corrente andrà persa.")) {
+            return; // Interrompe l'uscita se l'utente clicca Annulla
         }
+    }
+
+    clearInterval(timerD); 
+    clearInterval(timerG);
+    mostraSchermata('home-screen');
+         }
 
         // --- ALTRE FUNZIONI ---
         const temi = ['', 'theme-light', 'theme-matrix', 'theme-sunset', 'theme-forest', 'theme-gold', 'theme-crimson', 'theme-midnight', 'theme-desert', 'theme-ultra'];
@@ -351,6 +392,7 @@ function apriCondivisioneAlternativa(url) {
     </script>
 </body>
 </html>
+
 
 
 
