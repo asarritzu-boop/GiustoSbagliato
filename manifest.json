@@ -1,0 +1,21 @@
+{
+  "name": "Giusto o Sbagliato? - Cyber Edition",
+  "short_name": "Cyber Quiz",
+  "description": "Sbaglia la risposta per vincere! Ispirato ad Avanti un Altro.",
+  "start_url": "https://asarritzu-boop.github.io/GiustoSbagliato/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "icona-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icona-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
