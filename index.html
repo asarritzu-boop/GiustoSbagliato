@@ -108,6 +108,20 @@
         .tools-grid { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .tool-btn { font-size: 0.8rem; cursor: pointer; padding: 12px; background: rgba(0,0,0,0.1); border: 1px solid var(--accent-neon); border-radius: 12px; font-weight: bold; color: var(--text-main); }
     </style>
+    <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(reg => console.log('Service Worker registrato per GiustoSbagliato!'))
+        .catch(err => console.log('Errore SW:', err));
+    });
+  }
+</script>
 </head>
 <body>
 
@@ -337,5 +351,6 @@ function apriCondivisioneAlternativa(url) {
     </script>
 </body>
 </html>
+
 
 
